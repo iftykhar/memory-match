@@ -8,6 +8,7 @@ const shuffleCards = () => {
   return pairs.sort(() => Math.random() - 0.5);
 };
 
+
 export default function GamePage() {
   const [deck, setDeck] = useState<string[]>([]);
   const [flipped, setFlipped] = useState<number[]>([]);
