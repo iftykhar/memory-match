@@ -1,91 +1,111 @@
-'use client'; 
-import { useState, useEffect, useRef } from 'react';
+"use client";
+import React, { useEffect, useState, useRef } from "react";
 
-const cards = ['🐶', '🐱', '🐵', '🦁', '🐸', '🐰']; 
+const cards = ["🍎", "🍌", "🍇", "🍒", "🍉", "🥝", "🍍", "🍑"];
 
 const shuffleCards = () => {
-  const pairs = [...cards, ...cards];
-  return pairs.sort(() => Math.random() - 0.5);
+  const doubled = [...cards, ...cards];
+  return doubled
+    .sort(() => Math.random() - 0.5)
+    .map((emoji, index) => ({ id: index, emoji, flipped: false }));
 };
 
-
-export default function GamePage() {
-  const [deck, setDeck] = useState<string[]>([]);
-  const [flipped, setFlipped] = useState<number[]>([]);
+export default function MemoryGame() {
+  const [deck, setDeck] = useState(shuffleCards());
+  const [selected, setSelected] = useState<number[]>([]);
   const [matched, setMatched] = useState<number[]>([]);
-  const [score, setScore] = useState<number>(0);
-  const [time, setTime] = useState<number>(0);
-  const [gameWon, setGameWon] = useState<boolean>(false);
-  const timeRef = useRef<NodeJS.Timeout | null>(null);
+  const [score, setScore] = useState(0);
+  const [time, setTime] = useState(0);
+  const [gameWon, setGameWon] = useState(false);
 
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    setDeck(shuffleCards());
-    // const timer = setInterval(() => {
-    timeRef.current = setInterval(() => {
-        setTime((t) => t+1 );
+
+    timerRef.current = setInterval(() => {
+      setTime((t) => t + 1);
     }, 1000);
 
-    return () =>{
-        if(timeRef.current) clearInterval(timeRef.current);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
     };
   }, []);
 
   useEffect(() => {
-    if(matched.length === deck.length && deck.length > 0){
-        setGameWon(true);
-        if(timeRef.current){
-            clearInterval(timeRef.current);
-        }
+    if (matched.length === deck.length && deck.length > 0) {
+      setGameWon(true);
+      if (timerRef.current) clearInterval(timerRef.current);
     }
   }, [matched, deck]);
 
   const handleClick = (index: number) => {
-    if (flipped.length === 2 || flipped.includes(index)) return;
-    const newFlipped = [...flipped, index];
-    setFlipped(newFlipped);
+    if (selected.length === 2 || selected.includes(index) || matched.includes(index)) return;
 
-    if (newFlipped.length === 2) {
-      const [first, second] = newFlipped;
-      if (deck[first] === deck[second]) {
-        setMatched((prev) => [...prev, first, second]);
-        setScore((s) => s+1);
+    const newSelected = [...selected, index];
+    setSelected(newSelected);
+
+    if (newSelected.length === 2) {
+      setScore((prev) => prev + 1);
+
+      const [firstIdx, secondIdx] = newSelected;
+      if (deck[firstIdx].emoji === deck[secondIdx].emoji) {
+        setMatched((prev) => [...prev, firstIdx, secondIdx]);
+        setSelected([]);
+      } else {
+        setTimeout(() => setSelected([]), 1000);
       }
-      setTimeout(() => setFlipped([]), 1000);
     }
   };
 
-  return (
-   
-    <main className="p-4 sm:p-6">
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-2 sm:gap-0">
-            <h1 className="text-lg sm:text-xl font-bold">Score: {score}</h1>
-            <h1 className="text-lg sm:text-xl font-bold">Time: {time}s</h1>
-        </div>
+  const restartGame = () => {
+    setDeck(shuffleCards());
+    setSelected([]);
+    setMatched([]);
+    setScore(0);
+    setTime(0);
+    setGameWon(false);
 
-        {gameWon ? (
-            <div className="text-center mt-10">
-                <h2 className="text-2xl sm:text-3xl font-bold text-green-600 mb-4">🎉 You Won!</h2>
-                <p className="text-base sm:text-lg">Score: {score} | Time: {time} seconds</p>
-            </div>
-        ) : (
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 sm:gap-4 justify-items-center">
-                {deck.map((card, i) => {
-                    const isFlipped = flipped.includes(i) || matched.includes(i);
-                    return (
-                        <button
-                            key={i}
-                            onClick={() => handleClick(i)}
-                            className={`w-16 h-16 sm:w-20 sm:h-20 text-xl sm:text-2xl rounded ${
-                                isFlipped ? 'bg-green-500' : 'bg-blue-500'
-                            } text-white flex items-center justify-center`}
-                        >
-                            {isFlipped ? card : '❓'}
-                        </button>
-                    );
-                })}
-            </div>
-        )}
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setTime((t) => t + 1);
+    }, 1000);
+  };
+
+  return (
+    <main className="flex flex-col items-center justify-center min-h-screen  p-4">
+      <h1 className="text-3xl font-bold mb-2">Memory Match Game 🧠</h1>
+      <div className="text-lg mb-2">⏱ Time: {time} seconds</div>
+      <div className="text-lg mb-4">🎯 Score: {score}</div>
+
+      <div className="grid grid-cols-4 gap-4">
+        {deck.map((card, index) => {
+          const isFlipped = selected.includes(index) || matched.includes(index);
+          return (
+            <button
+              key={card.id}
+              onClick={() => handleClick(index)}
+              className={`w-16 h-16 text-2xl rounded shadow flex items-center justify-center ${
+                isFlipped ? "bg-white" : "bg-gray-400"
+              }`}
+            >
+              {isFlipped ? card.emoji : "❓"}
+            </button>
+          );
+        })}
+      </div>
+
+      {gameWon && (
+        <div className="mt-6 text-green-600 font-semibold text-xl">🎉 You won in {time} seconds with a score of {score}!</div>
+      )}
+
+    <button
+      onClick={restartGame}
+      className={`mt-6 px-4 py-2 rounded text-white ${
+        gameWon ? "bg-green-500 hover:bg-green-600" : "bg-blue-500 hover:bg-blue-600"
+      }`}
+    >
+      {gameWon ? "Play Again" : "Restart Game"}
+    </button>
     </main>
   );
 }
