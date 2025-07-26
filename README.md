@@ -12,7 +12,7 @@ A fun and simple memory matching game built using **Next.js (App Router)** and *
 
 ## 📸 Demo
 
-![Game Screenshot](./public/demo.png)  
+![Game Screenshot](./public/game1.png)  
 *Flip the cards and try to match them all as fast as possible!*
 
 ## 🧩 How to Play
