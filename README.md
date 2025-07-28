@@ -1,4 +1,4 @@
-<a href='https://memory-match-weld.vercel.app/' target='_blank'><img src='https://i.postimg.cc/jdCvdk3D/game3.png' border='0' alt='weather-client-dsk'/></a>
+<a href='https://memory-match-weld.vercel.app/' target='_blank'><img src='https://i.postimg.cc/jdCvdk3D/game3.png' border='0' alt='memory-match-game'/></a>
 # 🧠 Memory Match Game
 
 A fun and simple memory matching game built using **Next.js (App Router)** and **TypeScript**. Flip the cards, match the emojis, and beat the clock!
@@ -14,10 +14,10 @@ A fun and simple memory matching game built using **Next.js (App Router)** and *
 ## 📸 Demo
 
 <!-- ![Game Screenshot](./public/game1.png)   -->
-<img src='./public/game1.png' >
-<img src='./public/game2.png' >
-<img src='./public/game3.png' >
 
+<img src='https://i.postimg.cc/MGN3hXCp/game1.png' border='0' alt='memory-match-game'/>
+<img src='https://i.postimg.cc/8khX0ptT/game2.png' border='0' alt='memory-match-game'/>
+<img src='https://i.postimg.cc/jdCvdk3D/game3.png' border='0' alt='memory-match-game'/>
 
 *Flip the cards and try to match them all as fast as possible!*
 
