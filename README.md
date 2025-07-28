@@ -14,10 +14,11 @@ A fun and simple memory matching game built using **Next.js (App Router)** and *
 ## 📸 Demo
 
 <!-- ![Game Screenshot](./public/game1.png)   -->
-
-<img src='https://i.postimg.cc/MGN3hXCp/game1.png' border='0' height='400px' width='400px' alt='memory-match-game'/>
-<img src='https://i.postimg.cc/8khX0ptT/game2.png' border='0' height='400px' width='400px' alt='memory-match-game'/>
-<img src='https://i.postimg.cc/jdCvdk3D/game3.png' border='0' height='400px' width='400px' alt='memory-match-game'/>
+<div align="center">
+    <img src='https://i.postimg.cc/MGN3hXCp/game1.png' alt='memory-match-game' width='300' height='300' style="margin: 0 10px;"/>
+    <img src='https://i.postimg.cc/8khX0ptT/game2.png' alt='memory-match-game' width='300' height='300' style="margin: 0 10px;"/>
+    <img src='https://i.postimg.cc/jdCvdk3D/game3.png' alt='memory-match-game' width='300' height='300' style="margin: 0 10px;"/>
+</div>
 
 *Flip the cards and try to match them all as fast as possible!*
 
