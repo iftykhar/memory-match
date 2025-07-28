@@ -15,9 +15,9 @@ A fun and simple memory matching game built using **Next.js (App Router)** and *
 
 <!-- ![Game Screenshot](./public/game1.png)   -->
 
-<img src='https://i.postimg.cc/MGN3hXCp/game1.png' border='0' alt='memory-match-game'/>
-<img src='https://i.postimg.cc/8khX0ptT/game2.png' border='0' alt='memory-match-game'/>
-<img src='https://i.postimg.cc/jdCvdk3D/game3.png' border='0' alt='memory-match-game'/>
+<img src='https://i.postimg.cc/MGN3hXCp/game1.png' border='0' height='400px' width='400px' alt='memory-match-game'/>
+<img src='https://i.postimg.cc/8khX0ptT/game2.png' border='0' height='400px' width='400px' alt='memory-match-game'/>
+<img src='https://i.postimg.cc/jdCvdk3D/game3.png' border='0' height='400px' width='400px' alt='memory-match-game'/>
 
 *Flip the cards and try to match them all as fast as possible!*
 
