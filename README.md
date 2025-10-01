@@ -43,7 +43,7 @@ A fun and simple memory matching game built using **Next.js (App Router)** and *
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/memory-match.git
+git clone https://github.com/iftykhar/memory-match.git
 cd memory-match
 ```
 ### 2. Install Dependencies
